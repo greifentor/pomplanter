@@ -6,4 +6,4 @@ The project has currently an implementation in go only, but a second one in java
 The tool creates a PlantUML output which displays any component and sub component of the passed POM file as a component in a component diagram. External dependencies and projects will not be displayed currently.
 
 
-* GO](./go/README.md)
+* [GO](./go/README.md)
