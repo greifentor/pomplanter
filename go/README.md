@@ -10,9 +10,14 @@ This is the documentation for the GO implementation of the tool.
 
 ## Build
 
-Build the application via
+Change into the project folder with a CLI and build the application via
 
 ```go build pomplanter.go pomreader.go```
+
+or just
+
+```go build .```
+
 
 
 ## Run
