@@ -22,7 +22,7 @@ or just
 
 ## Run
 
-Start the application either by
+Change into the project folder with a CLI and start the application either by
 
 ```go run pomplanter.go pomreader.go {pomFileName}```
 
