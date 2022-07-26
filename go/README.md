@@ -28,6 +28,10 @@ Start the application either by
 
 or 
 
+```go run . {pomFileName}```
+
+or 
+
 ```.\pomplanter.exe {pomFileName}```
 
 in case the project is already build.
