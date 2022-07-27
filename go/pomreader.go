@@ -5,6 +5,7 @@ import (
 	"io"
 	"io/ioutil"
 	"log"
+    "path/filepath"
 	"strings"
 )
 
@@ -91,9 +92,9 @@ func ReadTreePOM(fileName string, moduleName string, poms []Pom) []Pom {
 	pom := ReadPOM(fileName)
 	pom.ModuleName = moduleName
 	poms = append(poms, *pom)
-	fileName = strings.ReplaceAll(fileName, "\\pom.xml", "")
+	fileName = strings.ReplaceAll(fileName, "/pom.xml", "")
 	for _, module := range pom.Modules.Module {
-		poms = ReadTreePOM(fileName+"\\"+module+"\\pom.xml", module, poms)
+		poms = ReadTreePOM(filepath.FromSlash(fileName+"/"+module+"/pom.xml"), module, poms)
 	}
 	return poms
 }
