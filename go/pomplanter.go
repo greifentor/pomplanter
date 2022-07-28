@@ -6,17 +6,6 @@ import (
 	"os"
 )
 
-func toModuleListString(modules Modules) string {
-	s := ""
-	for _, module := range modules.Module {
-		if len(s) > 0 {
-			s = s + ", "
-		}
-		s = s + module
-	}
-	return s
-}
-
 func BuildDiagram(poms []Pom) string {
 	s := "@startuml\n\n"
 	for _, pom := range poms {

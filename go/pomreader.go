@@ -5,7 +5,7 @@ import (
 	"io"
 	"io/ioutil"
 	"log"
-    "path/filepath"
+	"path/filepath"
 	"strings"
 )
 
@@ -65,15 +65,6 @@ func (i *Properties) UnmarshalXML(d *xml.Decoder, start xml.StartElement) error 
 	}
 }
 
-func toValue(element string, pom Pom) string {
-	element = strings.ReplaceAll(element, "${project.artifactId}", pom.ArtifactId)
-	element = strings.ReplaceAll(element, "${project.version}", pom.Version)
-	for key, e := range pom.Properties {
-		element = strings.ReplaceAll(element, "${"+key+"}", e)
-	}
-	return element
-}
-
 func ReadPOM(fileName string) *Pom {
 	pom := new(Pom)
 	content, err := ioutil.ReadFile(fileName)
@@ -88,11 +79,12 @@ func ReadPOM(fileName string) *Pom {
 }
 
 func ReadTreePOM(fileName string, moduleName string, poms []Pom) []Pom {
+	fileName = filepath.FromSlash(fileName)
 	log.Println("Reading:", fileName)
 	pom := ReadPOM(fileName)
 	pom.ModuleName = moduleName
 	poms = append(poms, *pom)
-	fileName = strings.ReplaceAll(fileName, "/pom.xml", "")
+	fileName = strings.ReplaceAll(fileName, filepath.FromSlash("/pom.xml"), "")
 	for _, module := range pom.Modules.Module {
 		poms = ReadTreePOM(filepath.FromSlash(fileName+"/"+module+"/pom.xml"), module, poms)
 	}
@@ -142,4 +134,13 @@ func LogPOM(pom Pom) {
 	for i, m := range pom.Modules.Module {
 		log.Println("           ", i, "->", m)
 	}
+}
+
+func toValue(element string, pom Pom) string {
+	element = strings.ReplaceAll(element, "${project.artifactId}", pom.ArtifactId)
+	element = strings.ReplaceAll(element, "${project.version}", pom.Version)
+	for key, e := range pom.Properties {
+		element = strings.ReplaceAll(element, "${"+key+"}", e)
+	}
+	return element
 }
