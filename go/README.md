@@ -32,7 +32,11 @@ or
 
 or 
 
-```.\pomplanter.exe {pomFileName}```
+```.\pomplanter.exe {pomFileName}``` (Windows)
+
+or 
+
+```.\pomplanter {pomFileName}``` (Linux)
 
 in case the project is already build.
 
